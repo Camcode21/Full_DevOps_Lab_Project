@@ -1,4 +1,4 @@
-name: CI
+  name: CI
 
 on:
   push:
@@ -9,6 +9,10 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Full_DevOps_Lab
 
     steps:
       # 1) Checkout source
@@ -21,6 +25,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: Full_DevOps_Lab/package-lock.json
 
       # 3) Install dependencies
       - name: Install dependencies
@@ -34,10 +39,10 @@ jobs:
       - name: Test (with coverage)
         run: npm test -- --coverage
 
-      # 6) Upload coverage folder as an artifact (viewable in Actions UI)
+      # 6) Upload coverage folder as an artifact
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: coverage-report
-          path: coverage
+          path: Full_DevOps_Lab/coverage
