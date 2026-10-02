@@ -27,9 +27,12 @@ jobs:
           cache: npm
           cache-dependency-path: Full_DevOps_Lab/package-lock.json
 
+      - name: Debug project files
+        run: |
+          pwd
+          ls -la
       # 3) Install dependencies
       - name: Install dependencies
-        working-directory: Full_DevOps_Lab
         run: npm ci
 
       # 4) Lint
