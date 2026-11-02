@@ -1,12 +1,7 @@
-
 import { Router } from 'express'
+import { doctors } from '../../data/store.js'
 
 const router = Router()
-
-const doctors = [
-  { id: 1, name: 'Dr. Sarah Lee', specialty: 'Cardiology' },
-  { id: 2, name: 'Dr. Amir Khan', specialty: 'Pediatrics' }
-]
 
 router.get('/api/doctors', (_req, res) => {
   res.status(200).json(doctors)
