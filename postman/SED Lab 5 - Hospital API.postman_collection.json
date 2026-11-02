@@ -1,0 +1,299 @@
+{
+  "info": {
+    "_postman_id": "a6bf0f8a-bd2e-4b90-a378-2a67458891ee",
+    "name": "SED Lab 5 - Hospital API",
+    "description": "### Welcome to Postman! This is your first collection.\n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests  \n• Test your API in real-world scenarios  \n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59410901",
+    "_collection_link": "https://go.postman.co/collection/59410901-a6bf0f8a-bd2e-4b90-a378-2a67458891ee?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "postman-echo.com/get",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "get"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Post data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "postman-echo.com/post",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "post"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "GET Doctors",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {\r\n  pm.response.to.have.status(200)\r\n})\r\n\r\npm.test('Response is an array', function () {\r\n  pm.expect(pm.response.json()).to.be.an('array')\r\n})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/doctors",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "doctors"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Doctors",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test('Status code is 201', function () {\r\n  pm.response.to.have.status(201)\r\n})\r\n\r\npm.test('Doctor is created correctly', function () {\r\n  const doctor = pm.response.json()\r\n  pm.expect(doctor.name).to.eql('Dr. Emma Wilson')\r\n  pm.expect(doctor.specialty).to.eql('Neurology')\r\n  pm.expect(doctor.id).to.be.a('number')\r\n})\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Dr. Emma Wilson\",\r\n  \"specialty\": \"Neurology\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/doctors",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "doctors"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Patients",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test('Status code is 200', function () {\r\n  pm.response.to.have.status(200)\r\n})\r\n\r\npm.test('Response is an array', function () {\r\n  pm.expect(pm.response.json()).to.be.an('array')\r\n})\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/patients",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "patients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Patients",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test('Status code is 201', function () {\r\n  pm.response.to.have.status(201)\r\n})\r\n\r\npm.test('Patient is created correctly', function () {\r\n  const patient = pm.response.json()\r\n  pm.expect(patient.name).to.eql('Emma')\r\n  pm.expect(patient.age).to.eql(25)\r\n  pm.expect(patient.id).to.be.a('number')\r\n})\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Emma\",\r\n  \"age\": 25\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/patients",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "patients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Appointments",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test('Status code is 200', function () {\r\n  pm.response.to.have.status(200)\r\n})\r\n\r\npm.test('Response is an array', function () {\r\n  pm.expect(pm.response.json()).to.be.an('array')\r\n})\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/appointments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "appointments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Appointments",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test('Status code is 201', function () {\r\n  pm.response.to.have.status(201)\r\n})\r\n\r\npm.test('Appointment is created correctly', function () {\r\n  const appointment = pm.response.json()\r\n  pm.expect(appointment.id).to.be.a('number')\r\n  pm.expect(appointment.doctorId).to.eql(1)\r\n  pm.expect(appointment.patientId).to.eql(1)\r\n  pm.expect(appointment.date).to.eql('2026-11-15')\r\n})\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"doctorId\": 1,\r\n  \"patientId\": 1,\r\n  \"date\": \"2026-11-15\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/appointments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "appointments"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
