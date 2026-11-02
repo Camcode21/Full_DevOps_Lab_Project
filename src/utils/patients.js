@@ -1,7 +1,4 @@
-const patients = [
-  { id: 1, name: 'Alice', age: 30 },
-  { id: 2, name: 'John', age: 45 }
-]
+import { patients } from '../data/store.js'
 
 export function listPatients () {
   return patients
