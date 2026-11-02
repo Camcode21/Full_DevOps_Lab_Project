@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -7,13 +8,12 @@ export default defineConfig({
       all: true,
       include: ['src/**/*.js'],
       exclude: [
-        'src/index.js',
-        'src/routes/auto/*.route.js'
+        'src/index.js'
       ],
       thresholds: {
         lines: 80,
         functions: 80,
-        branches: 70,
+        branches: 80,
         statements: 80
       }
     }
