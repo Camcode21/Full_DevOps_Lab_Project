@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
 import { patients } from '../data/store.js'
 
 export function listPatients () {
