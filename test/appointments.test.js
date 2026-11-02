@@ -36,24 +36,42 @@ describe('Appointments API', () => {
     expect(res.status).toBe(400)
   })
 
+  it('should create an appointment with a newly created doctor', async () => {
+    const doctorRes = await request(app)
+      .post('/api/doctors')
+      .send({ name: 'Dr. Test', specialty: 'Neurology' })
 
-it('should create an appointment with a newly created doctor', async () => {
-  const doctorRes = await request(app)
-    .post('/api/doctors')
-    .send({ name: 'Dr. Test', specialty: 'Neurology' })
+    expect(doctorRes.status).toBe(201)
 
-  expect(doctorRes.status).toBe(201)
+    const appointmentRes = await request(app)
+      .post('/api/appointments')
+      .send({
+        doctorId: doctorRes.body.id,
+        patientId: 1,
+        date: '2026-11-15'
+      })
 
-  const appointmentRes = await request(app)
-    .post('/api/appointments')
-    .send({
-      doctorId: doctorRes.body.id,
-      patientId: 1,
-      date: '2026-11-15'
-    })
+    expect(appointmentRes.status).toBe(201)
+    expect(appointmentRes.body.doctorId).toBe(doctorRes.body.id)
+  })
 
-  expect(appointmentRes.status).toBe(201)
-  expect(appointmentRes.body.doctorId).toBe(doctorRes.body.id)
+  it('should create an appointment with a newly created patient', async () => {
+    const patientRes = await request(app)
+      .post('/api/patients')
+      .send({ name: 'Test Patient', age: 25 })
+
+    expect(patientRes.status).toBe(201)
+
+    const appointmentRes = await request(app)
+      .post('/api/appointments')
+      .send({
+        doctorId: 1,
+        patientId: patientRes.body.id,
+        date: '2026-11-20'
+      })
+
+    expect(appointmentRes.status).toBe(201)
+    expect(appointmentRes.body.patientId).toBe(patientRes.body.id)
+  })
 })
 
-})
